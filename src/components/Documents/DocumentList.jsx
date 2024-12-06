@@ -31,6 +31,7 @@ const DocumentList = ({ role }) => {
     return (
         <div className="bg-white shadow-md rounded-lg p-6 w-full">
             <h2 className="text-xl font-semibold text-gray-800 mb-4">Your Documents</h2>
+            
             {role === 'researcher' && (
                 <button
                     onClick={() => navigate('/documents/new')}
