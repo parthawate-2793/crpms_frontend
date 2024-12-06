@@ -31,12 +31,14 @@ const DocumentList = ({ role }) => {
     return (
         <div className="bg-white shadow-md rounded-lg p-6 w-full">
             <h2 className="text-xl font-semibold text-gray-800 mb-4">Your Documents</h2>
-            <button
-                onClick={() => navigate('/documents/new')}
-                className="mb-4 px-4 py-2 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2"
-            >
-                Create New Document
-            </button>
+            {role === 'researcher' && (
+                <button
+                    onClick={() => navigate('/documents/new')}
+                    className="mb-6 px-4 py-2 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2"
+                >
+                    Create New Document
+                </button>
+            )}
             <ul className="space-y-4">
                 {documents.map((doc) => (
                     <li
