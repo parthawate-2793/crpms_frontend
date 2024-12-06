@@ -4,14 +4,11 @@ import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../api/axiosInstance";
 
 const DocumentList = ({ role }) => {
-    console.log(role);
     const { documents } = useContext(DocumentContext);
     const navigate = useNavigate();
 
     const handleView = (id) => navigate(`/documents/${id}`);
-
     const handleEdit = (id) => navigate(`/documents/${id}/edit`);
-
     const handleDownload = async (id) => {
         try {
             const response = await axiosInstance.get(`/documents/${id}/download`, {
@@ -29,9 +26,9 @@ const DocumentList = ({ role }) => {
     };
 
     return (
-        <div className="bg-white shadow-md rounded-lg p-6 w-full">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4">Your Documents</h2>
-            
+        <div className="bg-white shadow-md rounded-lg p-6">
+            <h2 className="text-2xl font-semibold text-gray-800 mb-6">Your Documents</h2>
+
             {role === 'researcher' && (
                 <button
                     onClick={() => navigate('/documents/new')}
@@ -40,17 +37,16 @@ const DocumentList = ({ role }) => {
                     Create New Document
                 </button>
             )}
-            <ul className="space-y-4">
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {documents.map((doc) => (
                     <li
                         key={doc._id}
-                        className="flex items-center justify-between p-4 border rounded-lg shadow-sm hover:shadow-md transition duration-200"
+                        className="flex flex-col items-start justify-between p-4 border rounded-lg shadow-sm hover:shadow-md transition duration-200"
                     >
-                        {/* Title Section */}
-                        <span className="text-gray-700 font-medium flex-1">{doc.title}</span>
-                        
-                        {/* Buttons Section */}
-                        <div className="flex flex-wrap items-center gap-2">
+                        <span className="text-lg font-medium text-gray-700 mb-4">
+                            {doc.title}
+                        </span>
+                        <div className="flex flex-wrap gap-2">
                             <button
                                 onClick={() => handleView(doc._id)}
                                 className="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600 transition duration-200"
@@ -75,11 +71,9 @@ const DocumentList = ({ role }) => {
                         </div>
                     </li>
                 ))}
-        </ul>
-
+            </ul>
         </div>
-
-    )
-}
+    );
+};
 
 export default DocumentList;
