@@ -13,7 +13,8 @@ const DashboardPage = () => {
         if (!user) {
             navigate('/login');
         } else {
-            fetchDocuments(user.role === 'reviewer'); // Needs Fixing
+            // fetchDocuments(user.role === 'reviewer');
+            fetchDocuments(true);
         }
     }, [user, navigate, fetchDocuments]);
 
